@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><link rel="stylesheet" type="text/css" href="//fonts.loli.net/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style-dark.css?v=2.0.4"><link rel="stylesheet" type="text/css" href="/css/highlight-dark.css?v=2.0.4"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="stylesheet" type="text/css" href="https://unpkg.com/gitalk/dist/gitalk.css?v=2.0.4"><title>遇見 Laravel 的午後(Part 1)-macOS | 廢言集</title><meta name="generator" content="Hexo 4.2.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">遇見 Laravel 的午後(Part 1)-macOS</h1><a id="logo" href="/.">廢言集</a><p class="description">從理想到實現</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首頁</i></a><a href="/archives/"><i class="fa fa-archive"> 所有文章</i></a><a href="/about/"><i class="fa fa-user"> 關於</i></a><a href="/atom.xml"><i class="fa fa-rss"> 訂閱</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="搜索"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">遇見 Laravel 的午後(Part 1)-macOS</h1><div class="post-meta"><a href="/2020/03/22/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%201)-macOS/#comments" class="comment-count"></a><p><span class="date">Mar 22, 2020</span><span><i id="busuanzi_container_page_pv"><i id="busuanzi_value_page_pv"></i><i>點擊</i></i></span></p></div><div class="post-content"><p>可能有人想說為什麼只有Windows的教學，但沒有mac的教學，是不是用mac的人沒人權呀？其實並不是，只是我需要時間來做測試等，所以各位看倌們，這篇就讓家瞧一瞧怎麼建立Laravel專案。</p>
+<h2 id="起手式"><a href="#起手式" class="headerlink" title="起手式"></a>起手式</h2><ul>
+<li>檢查本機是否有PHP</li>
+<li>下載安裝 Composer</li>
+<li>下載 Laravel 安裝檔</li>
+<li>建立一個Laravel 專案</li>
+</ul>
+<h2 id="檢查PHP版本-使用內建終端機"><a href="#檢查PHP版本-使用內建終端機" class="headerlink" title="檢查PHP版本(使用內建終端機)"></a>檢查PHP版本(使用內建終端機)</h2><h3 id="macOS-本身內建php及Apache，所以基本上不用再另外安裝。"><a href="#macOS-本身內建php及Apache，所以基本上不用再另外安裝。" class="headerlink" title="macOS 本身內建php及Apache，所以基本上不用再另外安裝。"></a>macOS 本身內建php及Apache，所以基本上不用再另外安裝。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -v</span><br></pre></td></tr></table></figure>
+
+<p>結果如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PHP 7.3.11 (cli) (built: Dec 13 2019 19:21:21) ( NTS )</span><br><span class="line">Copyright (c) 1997-2018 The PHP Group</span><br><span class="line">Zend Engine v3.3.11, Copyright (c) 1998-2018 Zend Technologies</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="以上版本如果太舊了，可以到以下網址查詢最新的版本指令"><a href="#以上版本如果太舊了，可以到以下網址查詢最新的版本指令" class="headerlink" title="以上版本如果太舊了，可以到以下網址查詢最新的版本指令"></a>以上版本如果太舊了，可以到以下網址查詢最新的版本指令</h3><p><a href="https://php-osx.liip.ch/#install" target="_blank" rel="noopener">For macOS PHP 7.3</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s https:&#x2F;&#x2F;php-osx.liip.ch&#x2F;install.sh | bash -s 7.3</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="若沒有查到PHP版本或是更新PHP版本，可以檢查環境變數"><a href="#若沒有查到PHP版本或是更新PHP版本，可以檢查環境變數" class="headerlink" title="若沒有查到PHP版本或是更新PHP版本，可以檢查環境變數"></a>若沒有查到PHP版本或是更新PHP版本，可以檢查環境變數</h3><p>查詢環境變數</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printenv</span><br></pre></td></tr></table></figure>
+
+<p>列出環境變數下的Path</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $PATH</span><br></pre></td></tr></table></figure>
+
+<p>開啟環境變數設定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi .bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>變更PHP環境變數</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PATH&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;opt&#x2F;php&#x2F;bin:$PATH&quot;</span><br><span class="line">export PATH&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;opt&#x2F;php&#x2F;sbin:$PATH&quot;</span><br></pre></td></tr></table></figure>
+
+<p>儲存(先按ESC按鈕) w=儲存；q=離開</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:wq</span><br></pre></td></tr></table></figure>
+
+<p>執行載入環境變數</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source .bash_profile</span><br></pre></td></tr></table></figure>
+
+<p><strong>※備註：看自己PHP設定在哪個位置。</strong></p>
+<h2 id="下載安裝Composer"><a href="#下載安裝Composer" class="headerlink" title="下載安裝Composer"></a>下載安裝Composer</h2><p>Composer 官網下載: <a href="https://getcomposer.org/download/" target="_blank" rel="noopener">https://getcomposer.org/download/</a></p>
+<p>下載composer安裝包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -r &quot;copy(&#39;https:&#x2F;&#x2F;getcomposer.org&#x2F;installer&#39;, &#39;composer-setup.php&#39;);&quot;</span><br></pre></td></tr></table></figure>
+
+<p>驗證安裝程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -r &quot;if (hash_file(&#39;sha384&#39;, &#39;composer-setup.php&#39;) &#x3D;&#x3D;&#x3D; &#39;e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a&#39;) &#123; echo &#39;Installer verified&#39;; &#125; else &#123; echo &#39;Installer corrupt&#39;; unlink(&#39;composer-setup.php&#39;); &#125; echo PHP_EOL;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>正式安裝composer</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php composer-setup.php</span><br></pre></td></tr></table></figure>
+
+
+<p>刪除composer安裝包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -r &quot;unlink(&#39;composer-setup.php&#39;);&quot;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<p>一鍵安裝composer</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sS https:&#x2F;&#x2F;getcomposer.org&#x2F;installer | php</span><br></pre></td></tr></table></figure>
+
+<p>移動composer.phar 並更改檔名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv composer.phar &#x2F;usr&#x2F;local&#x2F;bin&#x2F;composer</span><br></pre></td></tr></table></figure>
+
+
+<p>以下文字是存取權限不足</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv: rename composer.phar to &#x2F;usr&#x2F;local&#x2F;bin&#x2F;composer: Permission denied</span><br></pre></td></tr></table></figure>
+
+<p>進到root權限，重新對composer下搬移指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su -</span><br></pre></td></tr></table></figure>
+
+<p>若沒建立過root密碼，可以參考連結<a href="https://www.jianshu.com/p/f0bafbec7634" target="_blank" rel="noopener">Mac OS X 下 su 命令提示 sorry 的解决方法(转)</a></p>
+<p>確認composer 是否安裝成功及版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer -v</span><br></pre></td></tr></table></figure>
+
+<p>更新composer版本的指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer self-update</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.imgur.com/YzzeVM0.png" alt=""></p>
+<h2 id="下載-Laravel-安裝包"><a href="#下載-Laravel-安裝包" class="headerlink" title="下載 Laravel 安裝包"></a>下載 Laravel 安裝包</h2><p><a href="https://laravel.com/docs/7.x" target="_blank" rel="noopener">Laravel 官網流程</a></p>
+<p>使用composer 下載laravel安裝包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer global require laravel&#x2F;installer</span><br></pre></td></tr></table></figure>
+
+<p>可惡，安裝沒有想像中的順利<br><img src="https://i.imgur.com/2gu1pNA.png" alt=""></p>
+<p>執行重新安裝php 7.3等安裝包<br>(安裝Homebrew 請參考本篇<a href="#安裝Homebrew">安裝流程</a>)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">brew install php@7.3</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;OR</span><br><span class="line"></span><br><span class="line">brew install php@7.4</span><br><span class="line"></span><br><span class="line">brew link php@7.3</span><br></pre></td></tr></table></figure>
+
+<h2 id="建立Laravel專案"><a href="#建立Laravel專案" class="headerlink" title="建立Laravel專案"></a>建立Laravel專案</h2><p>重新安裝composer laravel，結果還是一樣有錯誤，最後我選擇放棄，我看到網友們的相關資訊可以參考，<strong>最後選擇直接安裝laravel專案，但在每次這樣建立專案，其實安裝速度真的特別慢，所以不太建議以這種方式。</strong><br>參考1 <a href="https://stackoverflow.com/questions/58290566/install-ext-zip-for-mac" target="_blank" rel="noopener">install ext-zip for Mac</a><br>參考2 <a href="https://bbs.archlinux.org/viewtopic.php?id=242255" target="_blank" rel="noopener">composer doesn’t find zip extension</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer create-project --prefer-dist laravel&#x2F;laravel blog</span><br></pre></td></tr></table></figure>
+
+<p>進入blog資料夾，執行PHP內建的啟動服務</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd blog</span><br><span class="line"></span><br><span class="line">php artisan serve</span><br></pre></td></tr></table></figure>
+
+
+<p>打開瀏覽器，一樣輸入：<a href="http://localhost:8000" target="_blank" rel="noopener">http://localhost:8000</a> 或 <a href="http://127.0.0.1:8000" target="_blank" rel="noopener">http://127.0.0.1:8000</a><br>就可以看到專案的首頁了<br><img src="https://i.imgur.com/Khpf1gD.png" alt=""></p>
+<p>結果是一樣的，只是步驟有點不一樣</p>
+<h2 id="安裝Homebrew"><a href="#安裝Homebrew" class="headerlink" title="安裝Homebrew"></a>安裝Homebrew</h2><p><a href="https://brew.sh/index_zh-tw" target="_blank" rel="noopener">Homebrew官網</a><br>在macOS版本裡使用指令安裝套件等，基本都是以Homebrew<br>但在Ubuntu等，是以apt-get。 </p>
+<h4 id="在-Mac-的終端機貼上以下指令："><a href="#在-Mac-的終端機貼上以下指令：" class="headerlink" title="在 Mac 的終端機貼上以下指令："></a>在 Mac 的終端機貼上以下指令：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure>
+<p>看到 Press RETURN to continue or any other key to abort. 以後請按return，再輸入使用者密碼</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Press RETURN to continue or any other key to abort</span><br></pre></td></tr></table></figure>
+
+<p>等待Homebrew下載，中途千萬不要做任何操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Downloading Command Line Tools for Xcode</span><br><span class="line"></span><br><span class="line">Downloaded Command Line Tools for Xcode</span><br><span class="line">Installing Command Line Tools for Xcode</span><br></pre></td></tr></table></figure>
+
+<p>看到以下訊息，代表安裝完成。</p>
+<p><img src="https://i.imgur.com/SPmLM0Z.png" alt=""></p>
+<p>查詢Homebrew版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">brew -v</span><br><span class="line"></span><br><span class="line">Homebrew 2.2.10</span><br><span class="line">Homebrew&#x2F;homebrew-core (git revision 17f4c7; last commit 2020-03-22)</span><br></pre></td></tr></table></figure>
+
+<p>以下是Homebrew常用指令集</p>
+<ul>
+<li>brew -v <code>查詢Homebrew版本</code></li>
+<li>brew -h <code>brew幫助</code></li>
+<li>brew update <code>更新Homebrew</code></li>
+<li>brew install <pkg_name> <code>安裝</code></li>
+<li>brew uninstall <pkg_name> <code>解除安裝</code></li>
+<li>brew search <pkg_name> <code>查詢安裝包</code></li>
+<li>brew list <code>安裝列表</code></li>
+<li>brew info <pkg_name> <code>檢視安裝包內容資訊</code></li>
+<li>brew upgrade <pkg_name> <code>更新安裝包</code></li>
+</ul>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>雖然遇到了一點難題，但結果是一樣的，如果各位看倌有什麼解決辦法，再麻煩分享一下。</p>
+<h6 id="標籤-w3HexSchool-PHP-Laravel-macOS"><a href="#標籤-w3HexSchool-PHP-Laravel-macOS" class="headerlink" title="標籤: w3HexSchool PHP Laravel macOS"></a>標籤: <code>w3HexSchool</code> <code>PHP</code> <code>Laravel</code> <code>macOS</code></h6></div><div class="post-copyright"><blockquote><p>原文作者: Sian</p><p>原文鏈接: <a href="https://dew31794.github.io/2020/03/22/遇見 Laravel 的午後(Part 1)-macOS/">https://dew31794.github.io/2020/03/22/遇見 Laravel 的午後(Part 1)-macOS/</a></p><p>版權聲明: 轉載請註明出處(必須保留作者署名及鏈接)</p></blockquote></div><div class="tags"><a href="/tags/w3HexSchool/">w3HexSchool</a><a href="/tags/PHP/">PHP</a><a href="/tags/Laravel/">Laravel</a><a href="/tags/macOS/">macOS</a></div><div class="post-share"></div><div class="post-nav"><a href="/2020/03/09/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%202)/" class="next">遇見 Laravel 的午後(Part 2)</a></div><div id="comments"><div id="container"><script type="text/javascript" src="https://unpkg.com/gitalk/dist/gitalk.min.js?v=2.0.4"></script><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=2.0.4"></script><script>var gitalk = new Gitalk({
+  clientID: 'edd3d64b97e77965fa56',
+  clientSecret: 'c62a4e0a719dcead27ec56efcaab400f89ef6107',
+  repo: 'blog-comments',
+  owner: 'dew31794',
+  admin: ['dew31794'],
+  id: md5(window.location.pathname),
+  distractionFreeMode: false,
+  language: 'zh-TW',
+  pagerDirection: 'last'
+})
+gitalk.render('container')</script></div></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目錄</i></div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#起手式"><span class="toc-text">起手式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#檢查PHP版本-使用內建終端機"><span class="toc-text">檢查PHP版本(使用內建終端機)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#macOS-本身內建php及Apache，所以基本上不用再另外安裝。"><span class="toc-text">macOS 本身內建php及Apache，所以基本上不用再另外安裝。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以上版本如果太舊了，可以到以下網址查詢最新的版本指令"><span class="toc-text">以上版本如果太舊了，可以到以下網址查詢最新的版本指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#若沒有查到PHP版本或是更新PHP版本，可以檢查環境變數"><span class="toc-text">若沒有查到PHP版本或是更新PHP版本，可以檢查環境變數</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下載安裝Composer"><span class="toc-text">下載安裝Composer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下載-Laravel-安裝包"><span class="toc-text">下載 Laravel 安裝包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立Laravel專案"><span class="toc-text">建立Laravel專案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安裝Homebrew"><span class="toc-text">安裝Homebrew</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在-Mac-的終端機貼上以下指令："><span class="toc-text">在 Mac 的終端機貼上以下指令：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#結論"><span class="toc-text">結論</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#標籤-w3HexSchool-PHP-Laravel-macOS"><span class="toc-text">標籤: w3HexSchool PHP Laravel macOS</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/22/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%201)-macOS/">遇見 Laravel 的午後(Part 1)-macOS</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/09/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%202)/">遇見 Laravel 的午後(Part 2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/08/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%201)/">遇見 Laravel 的午後(Part 1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/28/JSON%E7%9A%84%E5%A5%A7%E7%A7%98%E8%88%87%E6%87%89%E7%94%A8%E6%99%82%E6%A9%9F(Part%204)/">JSON的奧秘與應用時機(Part 4)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/23/JSON%E7%9A%84%E5%A5%A7%E7%A7%98%E8%88%87%E6%87%89%E7%94%A8%E6%99%82%E6%A9%9F(Part%203)/">JSON的奧秘與應用時機(Part 3)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/16/JSON%E7%9A%84%E5%A5%A7%E7%A7%98%E8%88%87%E6%87%89%E7%94%A8%E6%99%82%E6%A9%9F(Part%202)/">JSON的奧秘與應用時機(Part 2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/08/JSON%E7%9A%84%E5%A5%A7%E7%A7%98%E8%88%87%E6%87%89%E7%94%A8%E6%99%82%E6%A9%9F(Part%201)/">JSON的奧秘與應用時機(Part 1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/02/week0/">廢言集開張</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 標籤</i></div><div class="tagcloud"><a href="/tags/w3HexSchool/" style="font-size: 15px;">w3HexSchool</a> <a href="/tags/Json/" style="font-size: 15px;">Json</a> <a href="/tags/PHP/" style="font-size: 15px;">PHP</a> <a href="/tags/Laravel/" style="font-size: 15px;">Laravel</a> <a href="/tags/macOS/" style="font-size: 15px;">macOS</a> <a href="/tags/%E5%BB%A2%E6%96%87/" style="font-size: 15px;">廢文</a> <a href="/tags/Laravel-7/" style="font-size: 15px;">Laravel 7</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 所有文章</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">8</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友站連結</i></div><ul></ul><a href="https://littlehorseboy.github.io/" title="小馬哥" target="_blank">小馬哥</a><ul></ul><a href="https://wadehuang1993.github.io/blog/" title="首任村長" target="_blank">首任村長</a><ul></ul><a href="https://ms314006.github.io/" title="神Ｑ超人" target="_blank">神Ｑ超人</a><ul></ul><a href="https://yeeinhole.github.io/" title="Master Yee" target="_blank">Master Yee</a><ul></ul><a href="https://fm0fm0.github.io/blog/" title="圈圈" target="_blank">圈圈</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">網站地圖</a> |  <a href="/atom.xml">訂閱本站</a> |  <a href="/about/">聯繫博主</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次，本站总访客数:<i id="busuanzi_container_site_uv"><i id="busuanzi_value_site_uv"></i></i>人</p><p><span> Copyright &copy;<a href="/." rel="nofollow">Sian.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/" target="_blank" rel="noopener"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.4"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.4" async></script></body></html>
