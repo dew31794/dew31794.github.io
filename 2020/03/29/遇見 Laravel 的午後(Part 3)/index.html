@@ -1,0 +1,104 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><link rel="stylesheet" type="text/css" href="//fonts.loli.net/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style-dark.css?v=2.0.4"><link rel="stylesheet" type="text/css" href="/css/highlight-dark.css?v=2.0.4"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="stylesheet" type="text/css" href="https://unpkg.com/gitalk/dist/gitalk.css?v=2.0.4"><title>遇見 Laravel 的午後(Part 3) | 廢言集</title><meta name="generator" content="Hexo 4.2.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">遇見 Laravel 的午後(Part 3)</h1><a id="logo" href="/.">廢言集</a><p class="description">從理想到實現</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首頁</i></a><a href="/archives/"><i class="fa fa-archive"> 所有文章</i></a><a href="/about/"><i class="fa fa-user"> 關於</i></a><a href="/atom.xml"><i class="fa fa-rss"> 訂閱</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="搜索"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">遇見 Laravel 的午後(Part 3)</h1><div class="post-meta"><a href="/2020/03/29/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%203)/#comments" class="comment-count"></a><p><span class="date">Mar 29, 2020</span><span><i id="busuanzi_container_page_pv"><i id="busuanzi_value_page_pv"></i><i>點擊</i></i></span></p></div><div class="post-content"><p>這章節，我們要簡單的呈現頁面的樣貌，所以還無法寫CRUD，至於什麼是CRUD，如果進度允許我下次會與大家做介紹，或許下禮拜就會開始介紹。</p>
+<h2 id="先簡單認識HTTP"><a href="#先簡單認識HTTP" class="headerlink" title="先簡單認識HTTP"></a>先簡單認識HTTP</h2><h3 id="HTTP請求方法（Request-methods）"><a href="#HTTP請求方法（Request-methods）" class="headerlink" title="HTTP請求方法（Request methods）"></a>HTTP請求方法（Request methods）</h3><table>
+<thead>
+<tr>
+<th>請求方法</th>
+<th>意思</th>
+<th>範例執行動作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>讀取</td>
+<td>查詢使用者</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>新增</td>
+<td>新增使用者</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>修改（修改整份文件）</td>
+<td>修改使用者</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>修改（修改其中幾個欄位）</td>
+<td></td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>刪除</td>
+<td>刪除使用者</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CONNECT</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>TRACE</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="HTTP狀態碼（Status-Code）"><a href="#HTTP狀態碼（Status-Code）" class="headerlink" title="HTTP狀態碼（Status Code）"></a>HTTP狀態碼（Status Code）</h3><p>HTTP Status Code（HTTP狀態碼），網站伺服器端就會回傳狀態碼(Status Code)，以下為常見的狀態。</p>
+<h4 id="成功回應"><a href="#成功回應" class="headerlink" title="成功回應"></a>成功回應</h4><p>200 OK <code>請求成功</code></p>
+<h4 id="重定向訊息"><a href="#重定向訊息" class="headerlink" title="重定向訊息"></a>重定向訊息</h4><p>301 Moved Permanently <code>永久轉址</code><br>302 Found <code>短暫轉址</code><br>304 Not Modified <code>未變動或未修改</code></p>
+<h4 id="用戶端錯誤回應"><a href="#用戶端錯誤回應" class="headerlink" title="用戶端錯誤回應"></a>用戶端錯誤回應</h4><p>400 Bad Request <code>錯誤請求</code><br>403 Forbidden <code>未經授權</code><br>404 Not Found <code>找不到網頁</code><br>408 Request Timeout <code>請求超時</code><br>410 Gone <code>永久移除或已不存在、過時網頁</code></p>
+<h4 id="伺服器端錯誤回應"><a href="#伺服器端錯誤回應" class="headerlink" title="伺服器端錯誤回應"></a>伺服器端錯誤回應</h4><p>500 Internal Server Error <code>內部伺服器錯誤，無法回應</code><br>502 Bad Gateway <code>伺服器的服務沒有正確執行</code><br>503 Service Unavailable <code>暫停服務</code><br>504 Gateway Timeout <code>伺服器上的服務超時</code></p>
+<h2 id="必須認識的REST-RESTful-API"><a href="#必須認識的REST-RESTful-API" class="headerlink" title="必須認識的REST/RESTful API"></a>必須認識的REST/RESTful API</h2><p>請求方法定義了多種方法，一個架構符合REST原則，就稱它為RESTful架構。</p>
+<h3 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h3><p>Representational State Transfer(資源表示狀態傳輸)，REST是一種設計風格而不是標準，REST的特徵分為伺服器/客戶端分離、無狀態、可快取、分層、統一介面。。HTTP符合REST架構，但使用HTTP就不一定符合REST架構。</p>
+<p>參考：<a href="https://medium.com/@jinghua.shih/%E7%AD%86%E8%A8%98-rest-%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E9%BA%BC-170ad2b45836" target="_blank" rel="noopener">[筆記] REST 到底是什麼</a></p>
+<h3 id="RESTful-API"><a href="#RESTful-API" class="headerlink" title="RESTful API"></a>RESTful API</h3><p>美麗(Beauty)的事物可以稱為Beautiful，設計為REST的系統就可以稱為RESTful，RESTful API與HTTP協議操作無關，但HTTP的方法(請求)是RESTful API的一種規範，所以有必要知道HTTP。</p>
+<h2 id="路由-Route"><a href="#路由-Route" class="headerlink" title="路由(Route)"></a>路由(Route)</h2><p>在網路管理中有一項設備是router(路由器)，他可以算是網路的中繼點，他負責配發給各User各自的IP。Laravel路由(Route)也一樣，配發給各頁面一組網址(門牌)，也就是掌控各網站的網址連結。假設有三個角色，如下圖，那人資就是那個扮演Route的角色。<br><img src="https://i.imgur.com/Upr56O2.png" alt=""></p>
+<p>Route類別符合<strong>RESTful</strong>標準(GET、POST、PUT、DELTE)等請求方式。</p>
+<p><code>專案名稱/routes/web.php</code></p>
+<p><img src="https://i.imgur.com/GAjtzc7.gif" alt=""></p>
+<p><strong>/</strong> = 根目錄，但也可以設定其他的網址。<br><strong>return</strong> =  導向哪個頁面、顯示哪一個View、或者是返回值。</p>
+<p><code>return view(&#39;welcome&#39;);</code> 導向 <code>專案名稱/resources/views/welcome.blade.php</code><br>為什麼只有welcome 沒有 welcome.blade.php，在laravel中會省略blade.php，但我們在建立blade模板時，是不得省略的，所以命名時要打正確，詳細的blade.php我們之後再做詳細介紹囉！</p>
+<h3 id="製作頁面-文字"><a href="#製作頁面-文字" class="headerlink" title="製作頁面(文字)"></a>製作頁面(文字)</h3><p>我們寫幾個簡單的文字，傳到頁面上，下方有兩段程式碼，兩個只差在有沒有<code>/</code> 根目錄的，其實可以做省略，結果是不影響的。</p>
+<p><strong>程式碼</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Route::get(<span class="string">'/demo'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'大家好，我是小黑'</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//OR </span></span><br><span class="line"></span><br><span class="line">Route::get(<span class="string">'demo'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'大家好，我是小黑'</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>結果</strong><br><img src="https://i.imgur.com/7dyNbZD.png" alt=""></p>
+<h3 id="製作頁面-傳值"><a href="#製作頁面-傳值" class="headerlink" title="製作頁面(傳值)"></a>製作頁面(傳值)</h3><p>我們可以get URL的值，傳到頁面上，但千萬記得function一定要給變數，這樣才可能回傳變數到頁面上。</p>
+<p><strong>程式碼</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Route::get(<span class="string">'hi/&#123;name&#125;'</span>, <span class="function"><span class="keyword">function</span> <span class="params">($name)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'您好，我是'</span>.$name;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>結果</strong></p>
+<p>輸入：<a href="http://127.0.0.1:8000/hi/姓名" target="_blank" rel="noopener">http://127.0.0.1:8000/hi/姓名</a></p>
+<p><img src="https://i.imgur.com/9tSgddY.png" alt=""></p>
+<hr>
+<p>上面的解釋可能讓有些人不太能理解，但如果以原生的PHP去做，那會怎麼做呢？參考以下範例，其實大概差不多的意思。</p>
+<p><strong>程式碼</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">'您好，我是'</span>.view($_GET[<span class="string">'name'</span>]);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">view</span><span class="params">($name)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> $name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>結果</strong><br><img src="https://i.imgur.com/Ktwlgcl.png" alt=""></p>
+<h3 id="查看所有-路由"><a href="#查看所有-路由" class="headerlink" title="查看所有 路由"></a>查看所有 路由</h3><p>寫一個網站可能會寫超多路由，我們可以透過這段指令去查詢所設定的路由</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan route:list</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.imgur.com/cwO4AIb.png" alt=""></p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>基本認知是必要的，如果直接上戰場，真的會不知道如何上手，一步一腳印，總會學起來的。</p>
+<h6 id="標籤-w3HexSchool-PHP-Laravel"><a href="#標籤-w3HexSchool-PHP-Laravel" class="headerlink" title="標籤: w3HexSchool PHP Laravel"></a>標籤: <code>w3HexSchool</code> <code>PHP</code> <code>Laravel</code></h6></div><div class="post-copyright"><blockquote><p>原文作者: Sian</p><p>原文鏈接: <a href="https://dew31794.github.io/2020/03/29/遇見 Laravel 的午後(Part 3)/">https://dew31794.github.io/2020/03/29/遇見 Laravel 的午後(Part 3)/</a></p><p>版權聲明: 轉載請註明出處(必須保留作者署名及鏈接)</p></blockquote></div><div class="tags"><a href="/tags/w3HexSchool/">w3HexSchool</a><a href="/tags/PHP/">PHP</a><a href="/tags/Laravel/">Laravel</a><a href="/tags/Laravel-7/">Laravel 7</a></div><div class="post-share"></div><div class="post-nav"><a href="/2020/03/22/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%201)-macOS/" class="next">遇見 Laravel 的午後(Part 1)-macOS</a></div><div id="comments"><div id="container"><script type="text/javascript" src="https://unpkg.com/gitalk/dist/gitalk.min.js?v=2.0.4"></script><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=2.0.4"></script><script>var gitalk = new Gitalk({
+  clientID: 'edd3d64b97e77965fa56',
+  clientSecret: 'c62a4e0a719dcead27ec56efcaab400f89ef6107',
+  repo: 'blog-comments',
+  owner: 'dew31794',
+  admin: ['dew31794'],
+  id: md5(window.location.pathname),
+  distractionFreeMode: false,
+  language: 'zh-TW',
+  pagerDirection: 'last'
+})
+gitalk.render('container')</script></div></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目錄</i></div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#先簡單認識HTTP"><span class="toc-text">先簡單認識HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP請求方法（Request-methods）"><span class="toc-text">HTTP請求方法（Request methods）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP狀態碼（Status-Code）"><span class="toc-text">HTTP狀態碼（Status Code）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#成功回應"><span class="toc-text">成功回應</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重定向訊息"><span class="toc-text">重定向訊息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用戶端錯誤回應"><span class="toc-text">用戶端錯誤回應</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#伺服器端錯誤回應"><span class="toc-text">伺服器端錯誤回應</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#必須認識的REST-RESTful-API"><span class="toc-text">必須認識的REST&#x2F;RESTful API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#REST"><span class="toc-text">REST</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RESTful-API"><span class="toc-text">RESTful API</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#路由-Route"><span class="toc-text">路由(Route)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#製作頁面-文字"><span class="toc-text">製作頁面(文字)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#製作頁面-傳值"><span class="toc-text">製作頁面(傳值)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看所有-路由"><span class="toc-text">查看所有 路由</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#結論"><span class="toc-text">結論</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#標籤-w3HexSchool-PHP-Laravel"><span class="toc-text">標籤: w3HexSchool PHP Laravel</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/29/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%203)/">遇見 Laravel 的午後(Part 3)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/22/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%201)-macOS/">遇見 Laravel 的午後(Part 1)-macOS</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/09/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%202)/">遇見 Laravel 的午後(Part 2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/08/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%201)/">遇見 Laravel 的午後(Part 1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/28/JSON%E7%9A%84%E5%A5%A7%E7%A7%98%E8%88%87%E6%87%89%E7%94%A8%E6%99%82%E6%A9%9F(Part%204)/">JSON的奧秘與應用時機(Part 4)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/23/JSON%E7%9A%84%E5%A5%A7%E7%A7%98%E8%88%87%E6%87%89%E7%94%A8%E6%99%82%E6%A9%9F(Part%203)/">JSON的奧秘與應用時機(Part 3)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/16/JSON%E7%9A%84%E5%A5%A7%E7%A7%98%E8%88%87%E6%87%89%E7%94%A8%E6%99%82%E6%A9%9F(Part%202)/">JSON的奧秘與應用時機(Part 2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/08/JSON%E7%9A%84%E5%A5%A7%E7%A7%98%E8%88%87%E6%87%89%E7%94%A8%E6%99%82%E6%A9%9F(Part%201)/">JSON的奧秘與應用時機(Part 1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/02/week0/">廢言集開張</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 標籤</i></div><div class="tagcloud"><a href="/tags/w3HexSchool/" style="font-size: 15px;">w3HexSchool</a> <a href="/tags/Json/" style="font-size: 15px;">Json</a> <a href="/tags/PHP/" style="font-size: 15px;">PHP</a> <a href="/tags/%E5%BB%A2%E6%96%87/" style="font-size: 15px;">廢文</a> <a href="/tags/Laravel/" style="font-size: 15px;">Laravel</a> <a href="/tags/macOS/" style="font-size: 15px;">macOS</a> <a href="/tags/Laravel-7/" style="font-size: 15px;">Laravel 7</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 所有文章</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">9</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友站連結</i></div><ul></ul><a href="https://littlehorseboy.github.io/" title="小馬哥" target="_blank">小馬哥</a><ul></ul><a href="https://wadehuang1993.github.io/blog/" title="首任村長" target="_blank">首任村長</a><ul></ul><a href="https://ms314006.github.io/" title="神Ｑ超人" target="_blank">神Ｑ超人</a><ul></ul><a href="https://yeeinhole.github.io/" title="Master Yee" target="_blank">Master Yee</a><ul></ul><a href="https://fm0fm0.github.io/blog/" title="圈圈" target="_blank">圈圈</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">網站地圖</a> |  <a href="/atom.xml">訂閱本站</a> |  <a href="/about/">聯繫博主</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次，本站总访客数:<i id="busuanzi_container_site_uv"><i id="busuanzi_value_site_uv"></i></i>人</p><p><span> Copyright &copy;<a href="/." rel="nofollow">Sian.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/" target="_blank" rel="noopener"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.4"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.4" async></script></body></html>
