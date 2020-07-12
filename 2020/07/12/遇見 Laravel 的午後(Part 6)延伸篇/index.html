@@ -1,0 +1,160 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><link rel="stylesheet" type="text/css" href="//fonts.loli.net/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style-dark.css?v=2.0.4"><link rel="stylesheet" type="text/css" href="/css/highlight-dark.css?v=2.0.4"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="stylesheet" type="text/css" href="https://unpkg.com/gitalk/dist/gitalk.css?v=2.0.4"><title>遇見 Laravel 的午後(Part 6)延伸篇 | 廢言集</title><meta name="generator" content="Hexo 4.2.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">遇見 Laravel 的午後(Part 6)延伸篇</h1><a id="logo" href="/.">廢言集</a><p class="description">從理想到實現</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首頁</i></a><a href="/archives/"><i class="fa fa-archive"> 所有文章</i></a><a href="/about/"><i class="fa fa-user"> 關於</i></a><a href="/atom.xml"><i class="fa fa-rss"> 訂閱</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="搜索"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">遇見 Laravel 的午後(Part 6)延伸篇</h1><div class="post-meta"><a href="/2020/07/12/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%206)%E5%BB%B6%E4%BC%B8%E7%AF%87/#comments" class="comment-count"></a><p><span class="date">Jul 12, 2020</span><span><i id="busuanzi_container_page_pv"><i id="busuanzi_value_page_pv"></i><i>點擊</i></i></span></p></div><div class="post-content"><p>在 Part 6的文章裡，只有新增會員的資料表，但我們要新增一個資料表讓會員可以分層級做個區別，之後可以跟會員資料表(members)做一個關聯。</p>
+<ul>
+<li>新增會員類別資料表</li>
+<li>會員資料表多一個會員類別欄位</li>
+</ul>
+<h2 id="新增會員類別"><a href="#新增會員類別" class="headerlink" title="新增會員類別"></a>新增會員類別</h2><p><code>migration</code> 在Part 6有提過，但是這章節會特別介紹擴充資料表欄位的部分。</p>
+<p><strong>建立會員類別 <code>migration</code></strong></p>
+<p>使用 artisan 指令建立 <code>Model</code> 及 <code>migration</code> ，由於之後可能會用到model的部分，所以一併建立。<br>命名規則：單字字首大寫，不加上複數。</p>
+<p>※ Model 在之後的章節會做介紹。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ php artisan make:model MemberCategory -m</span><br><span class="line"></span><br><span class="line">or</span><br><span class="line"></span><br><span class="line">$ php artisan make:model MemberCategory --migration</span><br></pre></td></tr></table></figure>
+
+<p>執行以上指令檔案建立在<br><code>專案 &gt; database &gt; migrations &gt; 2020_07_02_113816_create_member_categories_table.php</code></p>
+<p><img src="https://i.imgur.com/PvGRJW3.png" alt=""></p>
+<p><strong>資料表欄位設計</strong>，設計會員類別所以的欄位。</p>
+<table>
+<thead>
+<tr>
+<th>英文名稱</th>
+<th>中文名稱</th>
+<th>資料庫型態</th>
+<th>鍵值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>編號</td>
+<td>int</td>
+<td>Primary Key</td>
+</tr>
+<tr>
+<td>name</td>
+<td>會員等級</td>
+<td>varchar(20)</td>
+<td></td>
+</tr>
+<tr>
+<td>level</td>
+<td>會員倍率</td>
+<td>int(11)</td>
+<td></td>
+</tr>
+<tr>
+<td>create_at</td>
+<td>建立時間</td>
+<td>datetime</td>
+<td></td>
+</tr>
+<tr>
+<td>update_at</td>
+<td>更新時間</td>
+<td>datetime</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>開啟 <code>2020_07_02_113816_create_member_categories_table.php</code>，將所需欄位轉換為 <code>migration</code>。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Migrations</span>\<span class="title">Migration</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Schema</span>\<span class="title">Blueprint</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Schema</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CreateMemberCategoriesTable</span> <span class="keyword">extends</span> <span class="title">Migration</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Run the migrations.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Schema::create(<span class="string">'member_categories'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</span><br><span class="line">            <span class="comment">// 設定儲存引擎類型。 預設：InnoDB</span></span><br><span class="line">            $table-&gt;engine = <span class="string">'MyISAM'</span>;</span><br><span class="line">            <span class="comment">// 編號</span></span><br><span class="line">            $table-&gt;Increments(<span class="string">'id'</span>);</span><br><span class="line">            <span class="comment">// 會員等級</span></span><br><span class="line">            $table-&gt;string(<span class="string">'name'</span>,<span class="number">20</span>)-&gt;nullable();</span><br><span class="line">            <span class="comment">// 會員倍率</span></span><br><span class="line">            $table-&gt;integer(<span class="string">'level'</span>)-&gt;nullable();</span><br><span class="line">            <span class="comment">// 建立時間、更新時間</span></span><br><span class="line">            $table-&gt;timestamps();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Reverse the migrations.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">down</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Schema::dropIfExists(<span class="string">'member_categories'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>預計規劃的欄位資料</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>level</th>
+<th>create_at</th>
+<th>update_at</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>一般會員</td>
+<td>1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>銅牌會員</td>
+<td>3</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>銀牌會員</td>
+<td>5</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>金牌會員</td>
+<td>8</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>白金會員</td>
+<td>10</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="會員資料新增會員類別欄位"><a href="#會員資料新增會員類別欄位" class="headerlink" title="會員資料新增會員類別欄位"></a>會員資料新增會員類別欄位</h2><p>之前有提到在建立 <code>migration</code> 的時候，會記錄日期時間，所以我們可以知道說在什麼時間做了欄位的調整，但由於我們在做會員資料表(members)的時候，沒有考慮到會員類別，所以我們要在下面另外建立新的 <code>migration</code>。</p>
+<h3 id="新增資料庫遷移-migration"><a href="#新增資料庫遷移-migration" class="headerlink" title="新增資料庫遷移(migration)"></a>新增資料庫遷移(migration)</h3><ul>
+<li>資料表使用英文複數(s、es)</li>
+<li>資料表用字母小寫，單字間用<strong>蛇底式命名(Snake Case)</strong></li>
+</ul>
+<p><strong>使用 artisan 指令建立 <code>migration</code>。</strong></p>
+<p>我們在下指令的時候，會以<strong>大駝峰式命名</strong>做命名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php artisan make:migration AddCategoryToMembers --table&#x3D;&quot;members&quot;</span><br></pre></td></tr></table></figure>
+
+<p>指令建立後的檔案名稱，會自動以<strong>小蛇形式命名</strong>。<br><img src="https://i.imgur.com/t1wjEZz.png" alt=""></p>
+<p>開啟 <code>2020_07_02_115745_add_category_to_members.php</code>，class名稱會以我們當初用指令建立的命名。</p>
+<p><code>專案 &gt; database &gt; migrations &gt; 2020_07_02_115745_add_category_to_members.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Migrations</span>\<span class="title">Migration</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Schema</span>\<span class="title">Blueprint</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Schema</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AddCategoryToMembers</span> <span class="keyword">extends</span> <span class="title">Migration</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Run the migrations.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Schema::table(<span class="string">'members'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Reverse the migrations.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">down</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Schema::table(<span class="string">'members'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>增加會員資料表(members)欄位</p>
+<table>
+<thead>
+<tr>
+<th>英文名稱</th>
+<th>中文名稱</th>
+<th>資料庫型態</th>
+<th>預設值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>category</td>
+<td>會員權限</td>
+<td>int</td>
+<td>預設值1為基本會員</td>
+</tr>
+</tbody></table>
+<p>將上面要增加的欄位轉換為 <code>migration</code>。<br>※ 將註解刪除，以免程式碼拉太長。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Migrations</span>\<span class="title">Migration</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Schema</span>\<span class="title">Blueprint</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Schema</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AddCategoryToMembers</span> <span class="keyword">extends</span> <span class="title">Migration</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Schema::table(<span class="string">'members'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</span><br><span class="line">            $table-&gt;integer(<span class="string">'category'</span>)-&gt;default(<span class="number">1</span>)-&gt;comment(<span class="string">'會員權限'</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">down</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Schema::table(<span class="string">'members'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</span><br><span class="line">            $table-&gt;dropColumn(<span class="string">'category'</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="建立資料表"><a href="#建立資料表" class="headerlink" title="建立資料表"></a>建立資料表</h2><p>終端機(cli)輸入以下指令：</p>
+<p>會執行 <code>public function up()</code> 方法來新增資料表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php artisan migrate</span><br></pre></td></tr></table></figure>
+
+<p>查看資料庫的資料表<br>1、會員類別資料表(member_categories)<br><img src="https://i.imgur.com/x9bRTrn.png" alt=""></p>
+<p>確認欄位及型態列的是否正確。<br><img src="https://i.imgur.com/kJbGfCW.png" alt=""></p>
+<p>2、會員資料表(members)增加欄位 <code>category</code><br><img src="https://i.imgur.com/w6eS2Mu.png" alt=""></p>
+<p>確認欄位建立正確。<br><img src="https://i.imgur.com/2OpCoTN.png" alt=""></p>
+<p>有關修改的操作可詳見 <a href="https://www.vnewin.com/day19-laravel-update-migration/?utm_source=ithelp&utm_medium=laravelday19&utm_campaign=link" target="_blank" rel="noopener">修改資料表新建 migration</a> </p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>在規劃資料表的時候，要把各種狀況想清楚，這樣開發的時候會減少一些不要的麻煩。</p>
+<h6 id="標籤-w3HexSchool-PHP-Laravel"><a href="#標籤-w3HexSchool-PHP-Laravel" class="headerlink" title="標籤: w3HexSchool PHP Laravel"></a>標籤: <code>w3HexSchool</code> <code>PHP</code> <code>Laravel</code></h6></div><div class="post-copyright"><blockquote><p>原文作者: Sian</p><p>原文鏈接: <a href="https://dew31794.github.io/2020/07/12/遇見 Laravel 的午後(Part 6)延伸篇/">https://dew31794.github.io/2020/07/12/遇見 Laravel 的午後(Part 6)延伸篇/</a></p><p>版權聲明: 轉載請註明出處(必須保留作者署名及鏈接)</p></blockquote></div><div class="tags"><a href="/tags/w3HexSchool/">w3HexSchool</a><a href="/tags/PHP/">PHP</a><a href="/tags/Laravel/">Laravel</a><a href="/tags/Laravel-7/">Laravel 7</a></div><div class="post-share"></div><div class="post-nav"><a href="/2020/07/05/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%2010)/" class="next">遇見 Laravel 的午後(Part 10)</a></div><div id="comments"><div id="container"><script type="text/javascript" src="https://unpkg.com/gitalk/dist/gitalk.min.js?v=2.0.4"></script><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=2.0.4"></script><script>var gitalk = new Gitalk({
+  clientID: 'edd3d64b97e77965fa56',
+  clientSecret: 'c62a4e0a719dcead27ec56efcaab400f89ef6107',
+  repo: 'blog-comments',
+  owner: 'dew31794',
+  admin: ['dew31794'],
+  id: md5(window.location.pathname),
+  distractionFreeMode: false,
+  language: 'zh-TW',
+  pagerDirection: 'last'
+})
+gitalk.render('container')</script></div></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目錄</i></div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#新增會員類別"><span class="toc-text">新增會員類別</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#會員資料新增會員類別欄位"><span class="toc-text">會員資料新增會員類別欄位</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#新增資料庫遷移-migration"><span class="toc-text">新增資料庫遷移(migration)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立資料表"><span class="toc-text">建立資料表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#結論"><span class="toc-text">結論</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#標籤-w3HexSchool-PHP-Laravel"><span class="toc-text">標籤: w3HexSchool PHP Laravel</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/07/12/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%206)%E5%BB%B6%E4%BC%B8%E7%AF%87/">遇見 Laravel 的午後(Part 6)延伸篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/05/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%2010)/">遇見 Laravel 的午後(Part 10)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/27/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%209)/">遇見 Laravel 的午後(Part 9)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/21/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%208)/">遇見 Laravel 的午後(Part 8)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/31/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%207)/">遇見 Laravel 的午後(Part 7)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%206)/">遇見 Laravel 的午後(Part 6)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/17/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%202%E7%95%AA%E5%A4%96%E7%AF%87%20PSR)/">遇見 Laravel 的午後(Part 2番外篇 PSR)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/02/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%205)/">遇見 Laravel 的午後(Part 5)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/19/%E9%96%8B%E7%99%BC%E5%B0%88%E6%A1%88%E5%BF%85%E9%A0%88%E5%AD%B8%E6%9C%83%E7%9A%84%E5%A5%97%E4%BB%B6%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7(NPM)/">開發專案必須學會的套件管理工具(NPM)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/05/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%204)/">遇見 Laravel 的午後(Part 4)</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 標籤</i></div><div class="tagcloud"><a href="/tags/w3HexSchool/" style="font-size: 15px;">w3HexSchool</a> <a href="/tags/Json/" style="font-size: 15px;">Json</a> <a href="/tags/PHP/" style="font-size: 15px;">PHP</a> <a href="/tags/%E5%BB%A2%E6%96%87/" style="font-size: 15px;">廢文</a> <a href="/tags/Laravel/" style="font-size: 15px;">Laravel</a> <a href="/tags/Laravel-7/" style="font-size: 15px;">Laravel 7</a> <a href="/tags/macOS/" style="font-size: 15px;">macOS</a> <a href="/tags/Composer/" style="font-size: 15px;">Composer</a> <a href="/tags/%E5%A5%97%E4%BB%B6%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" style="font-size: 15px;">套件管理工具</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 所有文章</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">19</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友站連結</i></div><ul></ul><a href="https://littlehorseboy.github.io/" title="小馬哥" target="_blank">小馬哥</a><ul></ul><a href="https://wadehuang1993.github.io/blog/" title="首任村長" target="_blank">首任村長</a><ul></ul><a href="https://ms314006.github.io/" title="神Ｑ超人" target="_blank">神Ｑ超人</a><ul></ul><a href="https://yeeinhole.github.io/" title="Master Yee" target="_blank">Master Yee</a><ul></ul><a href="https://fm0fm0.github.io/blog/" title="圈圈" target="_blank">圈圈</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">網站地圖</a> |  <a href="/atom.xml">訂閱本站</a> |  <a href="/about/">聯繫博主</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次，本站总访客数:<i id="busuanzi_container_site_uv"><i id="busuanzi_value_site_uv"></i></i>人</p><p><span> Copyright &copy;<a href="/." rel="nofollow">Sian.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/" target="_blank" rel="noopener"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.4"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.4" async></script></body></html>
