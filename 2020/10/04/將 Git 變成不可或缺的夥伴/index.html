@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><link rel="stylesheet" type="text/css" href="//fonts.loli.net/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style-dark.css?v=2.0.4"><link rel="stylesheet" type="text/css" href="/css/highlight-dark.css?v=2.0.4"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="stylesheet" type="text/css" href="https://unpkg.com/gitalk/dist/gitalk.css?v=2.0.4"><title>將 Git 變成不可或缺的夥伴 | 廢言集</title><meta name="generator" content="Hexo 4.2.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">將 Git 變成不可或缺的夥伴</h1><a id="logo" href="/.">廢言集</a><p class="description">從理想到實現</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首頁</i></a><a href="/archives/"><i class="fa fa-archive"> 所有文章</i></a><a href="/about/"><i class="fa fa-user"> 關於</i></a><a href="/atom.xml"><i class="fa fa-rss"> 訂閱</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="搜索"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">將 Git 變成不可或缺的夥伴</h1><div class="post-meta"><a href="/2020/10/04/%E5%B0%87%20Git%20%E8%AE%8A%E6%88%90%E4%B8%8D%E5%8F%AF%E6%88%96%E7%BC%BA%E7%9A%84%E5%A4%A5%E4%BC%B4/#comments" class="comment-count"></a><p><span class="date">Oct 04, 2020</span><span><i id="busuanzi_container_page_pv"><i id="busuanzi_value_page_pv"></i><i>點擊</i></i></span></p></div><div class="post-content"><p>在開發者愈來愈多的時代，Git 變成一個標配的技術工具，以前的我覺得 Git 是一個容易學的工具，雖然表面上是這樣，但是實際上並不是，因為以前使用圖形化介面的 Git 工具做版本控制，但會使用圖形化介面，不代表就會使用指令做 Git，但說這我們開始來介紹使用 Git 。</p>
+<p><strong>※ Git 不等於 GitHub<br>※ Git 不等於 GitHub<br>※ Git 不等於 GitHub</strong></p>
+<p>很重要所以講三次。</p>
+<h2 id="為什麼要版本控制工具？"><a href="#為什麼要版本控制工具？" class="headerlink" title="為什麼要版本控制工具？"></a>為什麼要版本控制工具？</h2><p>在我們做任何專案或是報告，一定會分好幾個版本，以報告為例，當你在做初版的文件時將某一段文字刪除，但是到了後面的版本，需要找到以前的那段文字，就需要做到版本控管。<br><img src="https://i.imgur.com/jEdKvCt.png" alt=""></p>
+<p>當程式專案的開發者，可能會有多個，但也有可能只有一個，但不管是幾個，版本控制也相對的重要，畢竟在回顧之前寫的程式，會比較方便尋找及回復。</p>
+<h3 id="版本控制分成三種"><a href="#版本控制分成三種" class="headerlink" title="版本控制分成三種"></a>版本控制分成三種</h3><p>我們這章節最主要講的是 Git ，所以我在分散式標了粗體。</p>
+<ol>
+<li>本地端版本控制 Local Version Control (LVC)</li>
+<li>集中式版本控制 Centralized Version Control (CVC)</li>
+<li><strong>分散式版本控制 Distributed Version Control (DVC)</strong></li>
+</ol>
+<p>參考資料：<br><a href="https://stevenjhu.com/2019/11/11/%E7%89%88%E6%9C%AC%E6%8E%A7%E7%AE%A1vcs-%E5%9F%BA%E7%A4%8E%E6%A6%82%E5%BF%B5%EF%BC%8Csvn%E3%80%81git%E6%AF%94%E8%BC%83/" target="_blank" rel="noopener">版本控管VCS-基礎概念，SVN、GIT比較</a><br><a href="https://www.ithome.com.tw/node/77088" target="_blank" rel="noopener">從集中版本控制到分散式版本控制 - 王建興</a></p>
+<h3 id="認識-Git"><a href="#認識-Git" class="headerlink" title="認識 Git"></a>認識 Git</h3><p>Git 是一套免費且開源的分散式版本控制的工具。</p>
+<h3 id="Git-版本控制的優點"><a href="#Git-版本控制的優點" class="headerlink" title="Git 版本控制的優點"></a>Git 版本控制的優點</h3><ul>
+<li>協同處理</li>
+<li>持續性</li>
+<li>關聯性</li>
+<li>保留歷史紀錄</li>
+</ul>
+<h3 id="有哪些支援-Git-服務的倉庫？"><a href="#有哪些支援-Git-服務的倉庫？" class="headerlink" title="有哪些支援 Git 服務的倉庫？"></a>有哪些支援 Git 服務的倉庫？</h3><p>以下為 Git 為核心建立的雲端服務平台。</p>
+<ul>
+<li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+<li><a href="https://about.gitlab.com" target="_blank" rel="noopener">GitLab</a></li>
+<li><a href="https://bitbucket.org" target="_blank" rel="noopener">Bitbuckit</a></li>
+<li><a href="https://gitee.com" target="_blank" rel="noopener">Gitee</a></li>
+<li><a href="https://coding.net/" target="_blank" rel="noopener">Coding</a></li>
+</ul>
+<h3 id="支援-Git-的-GUI-軟體"><a href="#支援-Git-的-GUI-軟體" class="headerlink" title="支援 Git 的 GUI 軟體"></a>支援 Git 的 GUI 軟體</h3><ul>
+<li><a href="https://desktop.github.com/" target="_blank" rel="noopener">GitHub Desktop</a></li>
+<li><a href="https://gitforwindows.org/" target="_blank" rel="noopener">Gitfor Windows</a></li>
+<li><a href="https://tortoisegit.org/" target="_blank" rel="noopener">TortoiseGit</a></li>
+<li><a href="https://www.sourcetreeapp.com/" target="_blank" rel="noopener">SourceTree</a></li>
+</ul>
+<h3 id="支援-Git-的-IDE-編輯器"><a href="#支援-Git-的-IDE-編輯器" class="headerlink" title="支援 Git 的 IDE 編輯器"></a>支援 Git 的 IDE 編輯器</h3><ul>
+<li><a href="https://visualstudio.microsoft.com/zh-hant/" target="_blank" rel="noopener">Visual Studio</a></li>
+</ul>
+<h2 id="如何安裝-Git-？-Windows-10"><a href="#如何安裝-Git-？-Windows-10" class="headerlink" title="如何安裝 Git ？ Windows 10"></a>如何安裝 Git ？ Windows 10</h2><p>至 <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">Git</a> 官網，下載安裝檔(選擇自己系統適合的安裝檔)。<br><img src="https://i.imgur.com/spi7HOc.jpg" alt=""></p>
+<p>打開安裝檔，之後都下一步<br><img src="https://i.imgur.com/1yuBvcF.png" alt=""></p>
+<p>安裝完，按左下角開始 &gt; 找 Git 資料夾 &gt; Git Bash </p>
+<p>※ Git Bash 視窗介面是模擬 Linux 終端機，用於 Windows OS系統 模擬 Linux。</p>
+<p><img src="https://i.imgur.com/H5e5y4z.png" alt=""></p>
+<p>輸入指令找尋 Git 的應用程式在哪裡</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ which git</span><br><span class="line">&#x2F;mingw64&#x2F;bin&#x2F;git</span><br></pre></td></tr></table></figure>
+
+<p>指令列我們來確認 Git 有安裝是否有安裝成功，如果沒有出現版本號，可參考以下狀況解決作法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git --version</span><br><span class="line">git version 2.27.0.windows.1</span><br></pre></td></tr></table></figure>
+
+<p><strong>【狀況解決】</strong></p>
+<p>本機右鍵 &gt; 內容 &gt;  進階系統設定 &gt; 進階標籤 &gt; 環境變數按鈕 &gt; 選取系統變數 path &gt; 編輯</p>
+<p><img src="https://i.imgur.com/yOmRudT.jpg" alt=""></p>
+<p>確認 Git 是否加入到環境變數<br><img src="https://i.imgur.com/xHKGKwv.jpg" alt=""></p>
+<h2 id="如何將檔案透過-Git-到儲存庫-倉庫"><a href="#如何將檔案透過-Git-到儲存庫-倉庫" class="headerlink" title="如何將檔案透過 Git 到儲存庫(倉庫)"></a>如何將檔案透過 Git 到儲存庫(倉庫)</h2><h3 id="建立工作目錄與儲存庫的初始化"><a href="#建立工作目錄與儲存庫的初始化" class="headerlink" title="建立工作目錄與儲存庫的初始化"></a>建立工作目錄與儲存庫的初始化</h3><p>建立資料夾，並進入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir LunchOrder</span><br><span class="line"></span><br><span class="line">$ cd LunchOrder</span><br></pre></td></tr></table></figure>
+
+<p>將工作目錄 建立初始化 Git 儲存庫，簡單說，將資料夾交由 Git 託管</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure>
+
+<p>確認是否有 <code>.git</code> 檔案</p>
+<p><code>ls</code> 列出當前目錄下的所有資料夾、檔案(參數：<code>-l</code> 詳細資料， <code>-a</code> 包含隱藏檔案、資料夾)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls -la</span><br><span class="line">$ ls -l -a</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">total 4</span><br><span class="line">drwxr-xr-x 1 username 197121 0 七月   24 17:40 .</span><br><span class="line">drwxr-xr-x 1 username 197121 0 七月   24 17:39 ..</span><br><span class="line">drwxr-xr-x 1 username 197121 0 七月   24 18:43 .git</span><br><span class="line">-rw-r--r-- 1 username 197121 0 七月   24 17:39 index.html</span><br></pre></td></tr></table></figure>
+
+<h3 id="Git初始配置"><a href="#Git初始配置" class="headerlink" title="Git初始配置"></a>Git初始配置</h3><p>設定提交後的 <strong>作者名稱</strong> 及 <strong>電子郵件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;black&quot;</span><br><span class="line">$ git config  --global user.email &quot;ya005845@hotmail.com&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看檔案狀態"><a href="#查看檔案狀態" class="headerlink" title="查看檔案狀態"></a>查看檔案狀態</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br></pre></td></tr></table></figure>
+
+<p><font color="#5899dd"><code>Untracked files</code></font>  列出 新增或異動(未加入儲存庫)的檔案，檔案皆在 <font style="background:#5899dd;color:#FFF;">工作目錄</font> 內。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">On branch master</span><br><span class="line"></span><br><span class="line">No commits yet</span><br><span class="line"></span><br><span class="line">Untracked files:</span><br><span class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to include <span class="keyword">in</span> what will be committed)</span><br><span class="line">        index.html</span><br><span class="line"></span><br><span class="line">nothing added to commit but untracked files present (use <span class="string">"git add"</span> to track)</span><br></pre></td></tr></table></figure>
+
+<h3 id="將新增或異動的檔案-加入-暫存區"><a href="#將新增或異動的檔案-加入-暫存區" class="headerlink" title="將新增或異動的檔案 加入 暫存區"></a>將新增或異動的檔案 加入 暫存區</h3><p>在工作目錄下，將<code>全部</code>未加入儲存庫的檔案，送至暫存區，將這批檔案建立索引。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git add .</span><br></pre></td></tr></table></figure>
+
+<p>查看本地端檔案異動狀態</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br></pre></td></tr></table></figure>
+
+<p><font color="#ea5e5b"><code>Changes to be committed</code></font> 代表此批檔案已加入到 <font style="background:#ea5e5b;color:#FFF;">暫存區</font>，且編制索引，尚未提交。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">On branch master</span><br><span class="line"></span><br><span class="line">No commits yet</span><br><span class="line"></span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="string">"git rm --cached &lt;file&gt;..."</span> to unstage)</span><br><span class="line">        new file:   index.html</span><br></pre></td></tr></table></figure>
+
+<h3 id="將暫存區檔看-提交到-本機儲存庫"><a href="#將暫存區檔看-提交到-本機儲存庫" class="headerlink" title="將暫存區檔看 提交到 本機儲存庫"></a>將暫存區檔看 提交到 本機儲存庫</h3><p>將異動程式提交到 <font style="background:#72be49;color:#FFF;">本機儲存庫</font>。<br><code>-m</code> 為 <code>--message</code> 的縮寫。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m &quot;第一次提交程式&quot;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="建立-遠端儲存庫-以GitHub為例"><a href="#建立-遠端儲存庫-以GitHub為例" class="headerlink" title="建立 遠端儲存庫 以GitHub為例"></a>建立 遠端儲存庫 以GitHub為例</h3><p>我們將儲存庫命名跟工作目錄名稱一樣，<strong>建議 Repository name 跟本機專案名稱是一樣</strong>。</p>
+<ul>
+<li><code>README</code>  可以自述儲存庫的內容資訊。 例如:使用說明、專案敘述等。</li>
+<li><code>.gitignore</code> 設定哪些檔案、資料夾，不做版本控制。例如:資料庫帳號密碼、IP、範本等。</li>
+<li><code>LICENSE</code> 專案授權方式。</li>
+</ul>
+<p>暫時不勾選 <code>README</code>，不選擇 <code>.gitignore</code> 和 <code>License</code>，以預設為主，本機專案為主，以免造成不必要問題。<br><img src="https://i.imgur.com/yeQ2W97.png" alt=""></p>
+<p>建立好儲存庫，將產生的儲存庫 URL 複製起來。<br>※  這個 URL 是 本機儲存庫 和 遠端儲存庫 的連結<br><img src="https://i.imgur.com/CmHAkOK.jpg" alt=""></p>
+<p>加入遠端儲存庫</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add &lt;遠端儲存庫簡稱&gt; &lt;url&gt;</span><br><span class="line">$ git remote add origin https:&#x2F;&#x2F;github.com&#x2F;dew31794&#x2F;LunchOrder.git</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.username &lt;你的 github 使用者名稱&gt;</span><br></pre></td></tr></table></figure>
+
+<p>將本機儲存庫 Push 到遠端儲存庫</p>
+<p>第一次 <code>Push</code> (推送)，帶上<code>--set-upstream</code>，本機儲存庫會追蹤遠端儲存庫的 <code>&lt;remote name&gt; &lt;branch name&gt;</code> 分支。</p>
+<p>第二次 要做 <code>Push</code> (推送)，只需要 <code>git push</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git push -u &lt;remote name&gt; &lt;branch name&gt;</span><br><span class="line">$ git push -u origin master</span><br><span class="line">$ git push --set-upstream github master #同上</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Enumerating objects: 3, <span class="keyword">done</span>.</span><br><span class="line">Counting objects: 100% (3/3), <span class="keyword">done</span>.</span><br><span class="line">Writing objects: 100% (3/3), 233 bytes | 233.00 KiB/s, <span class="keyword">done</span>.</span><br><span class="line">Total 3 (delta 0), reused 0 (delta 0), pack-reused 0</span><br><span class="line">To https://github.com/dew31794/LunchOrder.git</span><br><span class="line"> * [new branch]      master -&gt; master</span><br><span class="line">Branch <span class="string">'master'</span> <span class="built_in">set</span> up to track remote branch <span class="string">'master'</span> from <span class="string">'origin'</span>.</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.imgur.com/BuJd3HR.png" alt=""></p>
+<hr>
+<h2 id="指令大集合"><a href="#指令大集合" class="headerlink" title="指令大集合"></a>指令大集合</h2><h3 id="Git詳細指令集"><a href="#Git詳細指令集" class="headerlink" title="Git詳細指令集"></a>Git詳細指令集</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git</span><br><span class="line"></span><br><span class="line">$ git config</span><br></pre></td></tr></table></figure>
+
+<h3 id="初始化儲存庫-註1"><a href="#初始化儲存庫-註1" class="headerlink" title="初始化儲存庫(註1)"></a>初始化儲存庫(註1)</h3><p>工作區目錄 建立初始化 Git 儲存庫</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure>
+
+<p>將工作區目錄建立一個裸儲存庫</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git init --bare</span><br></pre></td></tr></table></figure>
+
+<p>參考文件：<a href="https://www.itread01.com/content/1523282175.html" target="_blank" rel="noopener">git init 與 git init –bare 區別</a></p>
+<h3 id="Git-基本資訊設置"><a href="#Git-基本資訊設置" class="headerlink" title="Git 基本資訊設置"></a>Git 基本資訊設置</h3><p>設定提交後的 <strong>作者名稱</strong> 及 <strong>電子郵件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;black&quot;</span><br><span class="line">$ git config --global user.email &quot;ya005845@hotmail.com&quot;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Git-執行狀態"><a href="#Git-執行狀態" class="headerlink" title="Git 執行狀態"></a>Git 執行狀態</h3><p>本地端檔案異動狀態</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>【未追蹤的檔案】 <font color="#30bd3b">Untracked files</font>：新的檔案，沒有加到 Git 的版本控管裡。<ul>
+<li>【將要提交的檔案】 <font color="#30bd3b">Changes to be committed</font>：在工作目錄(WD)的檔案執行git add後，會放在暫存區(Stage)。這些放在暫存區的檔案狀態便是等待提交囉！</li>
+<li>【被更動但尚未要提交的檔案】 <font color="#30bd3b">Changes not staged for commit</font>：已提交版本後，卻又再次修改，這些檔案會被丟回工作目錄(WD)</li>
+<li>【已提交】 <font color="#30bd3b">Committed</font>：在暫存區(Stage)的檔案執行git commit後，檔案便置於儲存區(Repo)，這些放在儲存區的檔案即是已提交的狀態。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Git-提交"><a href="#Git-提交" class="headerlink" title="Git 提交"></a>Git 提交</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m &quot;提交說明內容&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="比對檔案差異"><a href="#比對檔案差異" class="headerlink" title="比對檔案差異"></a>比對檔案差異</h3><p>比較現在檔案與上次 commit 到本機儲存庫的差異</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git diff</span><br></pre></td></tr></table></figure>
+
+<h6 id="標籤-w3HexSchool-Git"><a href="#標籤-w3HexSchool-Git" class="headerlink" title="標籤: w3HexSchool Git"></a>標籤: <code>w3HexSchool</code> <code>Git</code></h6></div><div class="post-copyright"><blockquote><p>原文作者: Sian</p><p>原文鏈接: <a href="https://dew31794.github.io/2020/10/04/將 Git 變成不可或缺的夥伴/">https://dew31794.github.io/2020/10/04/將 Git 變成不可或缺的夥伴/</a></p><p>版權聲明: 轉載請註明出處(必須保留作者署名及鏈接)</p></blockquote></div><div class="tags"><a href="/tags/w3HexSchool/">w3HexSchool</a><a href="/tags/Git/">Git</a></div><div class="post-share"></div><div class="post-nav"><a href="/2020/09/12/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%2016)/" class="next">遇見 Laravel 的午後(Part 16)</a></div><div id="comments"><div id="container"><script type="text/javascript" src="https://unpkg.com/gitalk/dist/gitalk.min.js?v=2.0.4"></script><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=2.0.4"></script><script>var gitalk = new Gitalk({
+  clientID: 'edd3d64b97e77965fa56',
+  clientSecret: 'c62a4e0a719dcead27ec56efcaab400f89ef6107',
+  repo: 'blog-comments',
+  owner: 'dew31794',
+  admin: ['dew31794'],
+  id: md5(window.location.pathname),
+  distractionFreeMode: false,
+  language: 'zh-TW',
+  pagerDirection: 'last'
+})
+gitalk.render('container')</script></div></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目錄</i></div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#為什麼要版本控制工具？"><span class="toc-text">為什麼要版本控制工具？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#版本控制分成三種"><span class="toc-text">版本控制分成三種</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#認識-Git"><span class="toc-text">認識 Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git-版本控制的優點"><span class="toc-text">Git 版本控制的優點</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有哪些支援-Git-服務的倉庫？"><span class="toc-text">有哪些支援 Git 服務的倉庫？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#支援-Git-的-GUI-軟體"><span class="toc-text">支援 Git 的 GUI 軟體</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#支援-Git-的-IDE-編輯器"><span class="toc-text">支援 Git 的 IDE 編輯器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何安裝-Git-？-Windows-10"><span class="toc-text">如何安裝 Git ？ Windows 10</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何將檔案透過-Git-到儲存庫-倉庫"><span class="toc-text">如何將檔案透過 Git 到儲存庫(倉庫)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#建立工作目錄與儲存庫的初始化"><span class="toc-text">建立工作目錄與儲存庫的初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git初始配置"><span class="toc-text">Git初始配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看檔案狀態"><span class="toc-text">查看檔案狀態</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#將新增或異動的檔案-加入-暫存區"><span class="toc-text">將新增或異動的檔案 加入 暫存區</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#將暫存區檔看-提交到-本機儲存庫"><span class="toc-text">將暫存區檔看 提交到 本機儲存庫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#建立-遠端儲存庫-以GitHub為例"><span class="toc-text">建立 遠端儲存庫 以GitHub為例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指令大集合"><span class="toc-text">指令大集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Git詳細指令集"><span class="toc-text">Git詳細指令集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化儲存庫-註1"><span class="toc-text">初始化儲存庫(註1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git-基本資訊設置"><span class="toc-text">Git 基本資訊設置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git-執行狀態"><span class="toc-text">Git 執行狀態</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git-提交"><span class="toc-text">Git 提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比對檔案差異"><span class="toc-text">比對檔案差異</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#標籤-w3HexSchool-Git"><span class="toc-text">標籤: w3HexSchool Git</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/%E5%B0%87%20Git%20%E8%AE%8A%E6%88%90%E4%B8%8D%E5%8F%AF%E6%88%96%E7%BC%BA%E7%9A%84%E5%A4%A5%E4%BC%B4/">將 Git 變成不可或缺的夥伴</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/12/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%2016)/">遇見 Laravel 的午後(Part 16)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/05/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%2015)/">遇見 Laravel 的午後(Part 15)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/30/PSR-4%20Autoloader/">PSR-4 Autoloader</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/23/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%2014)/">遇見 Laravel 的午後(Part 14)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/16/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%205)%20%E5%BB%B6%E4%BC%B8%E7%AF%87/">遇見 Laravel 的午後(Part 5) 延伸篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/09/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%2013)/">遇見 Laravel 的午後(Part 13)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/02/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%2012)/">遇見 Laravel 的午後(Part 12)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/26/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%2011)/">遇見 Laravel 的午後(Part 11)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/19/%E9%81%87%E8%A6%8B%20Laravel%20%E7%9A%84%E5%8D%88%E5%BE%8C(Part%208%E3%80%819)%E5%BB%B6%E4%BC%B8%E7%AF%87/">遇見 Laravel 的午後(Part 8、9)延伸篇</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 標籤</i></div><div class="tagcloud"><a href="/tags/w3HexSchool/" style="font-size: 15px;">w3HexSchool</a> <a href="/tags/Json/" style="font-size: 15px;">Json</a> <a href="/tags/PHP/" style="font-size: 15px;">PHP</a> <a href="/tags/%E5%BB%A2%E6%96%87/" style="font-size: 15px;">廢文</a> <a href="/tags/PSR/" style="font-size: 15px;">PSR</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Laravel/" style="font-size: 15px;">Laravel</a> <a href="/tags/macOS/" style="font-size: 15px;">macOS</a> <a href="/tags/Laravel-7/" style="font-size: 15px;">Laravel 7</a> <a href="/tags/%E5%A5%97%E4%BB%B6%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" style="font-size: 15px;">套件管理工具</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 所有文章</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">29</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友站連結</i></div><ul></ul><a href="https://littlehorseboy.github.io/" title="小馬哥" target="_blank">小馬哥</a><ul></ul><a href="https://wadehuang1993.github.io/blog/" title="首任村長" target="_blank">首任村長</a><ul></ul><a href="https://ms314006.github.io/" title="神Ｑ超人" target="_blank">神Ｑ超人</a><ul></ul><a href="https://yeeinhole.github.io/" title="Master Yee" target="_blank">Master Yee</a><ul></ul><a href="https://fm0fm0.github.io/blog/" title="圈圈" target="_blank">圈圈</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">網站地圖</a> |  <a href="/atom.xml">訂閱本站</a> |  <a href="/about/">聯繫博主</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次，本站总访客数:<i id="busuanzi_container_site_uv"><i id="busuanzi_value_site_uv"></i></i>人</p><p><span> Copyright &copy;<a href="/." rel="nofollow">Sian.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/" target="_blank" rel="noopener"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.4"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.4" async></script></body></html>
